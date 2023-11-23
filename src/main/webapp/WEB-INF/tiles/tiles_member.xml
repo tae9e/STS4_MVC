@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "file:///C:\tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+	<!-- main layout -->
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+		<put-attribute name="title" value="메인페이지" />
+	</definition>
+	
+	<definition name="/member/listMembers" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/member/listMembers.jsp" />
+		<put-attribute name="title" value="회원목록창" />
+	</definition>
+	<definition name="/member/memberForm" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/member/memberForm.jsp" />
+		<put-attribute name="title" value="회원등록창" />
+	</definition>
+</tiles-definitions>
+
+
+
+
+
+
