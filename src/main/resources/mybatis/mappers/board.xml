@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.board">
+
+	<!-- oracle database에 있는 내용 가지고 올 때 사용 -->
+	<resultMap type="articleVO" id="articlesResult">
+		<result property="level" column="level" />
+		<result property="articleNO" column="articleNO" />
+		<result property="parentNO" column="parentNO" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="imageFileName" column="imageFileName" />
+<!-- 		id: 외부에서 오는 외래키 -->
+<!-- 		<result property="id" column="id" /> -->
+		<result property="writeDate" column="writeDate" />
+	</resultMap>
+	
+	<resultMap type="imageVO" id="imageResult">
+		<result property="imageFileNO" column="imageFileNO" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="articleNO" column="articleNO" />
+	</resultMap>
+
+	<!-- id=dao 인터페이스의 메소드 이름 -->
+	<select id="SelectAllArticleList" resultMap="articlesResult">
+		<![CDATA[
+		select * from t_board order by writeDate desc
+		]]>
+	</select>
+	
+	
+	<insert id="insertNewArticle" parameterType="articleVO">
+  <![CDATA[
+  insert into t_board(title,content,imageFileName) values(#{title},#{content},#{imageFileName})
+  ]]>
+	</insert>
+	
+	<delete id="deleteArticle" parameterType="string">
+	<![CDATA[
+  	delete from t_member where id=#{id}
+  ]]>
+	</delete>
+
+
+
+</mapper> 

@@ -13,5 +13,6 @@
 <body>
 <h2>사이트 메뉴</h2>
 <h2><a href="${contextPath }/member/listMembers.do">회원관리</a></h2>
+<h2><a href="${contextPath }/board/listArticles.do">게시판 관리</a></h2>
 </body>
 </html>

@@ -14,6 +14,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter{
 				new ViewNameInterceptor())
 		       .addPathPatterns("/*.do")
 		       .addPathPatterns("/*/*.do")
+		       //Intercepter 제외
 		       .excludePathPatterns("/users/login");
 	}
 }

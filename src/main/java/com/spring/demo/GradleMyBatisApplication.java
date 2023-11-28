@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.spring.demo.member"})
+@ComponentScan(basePackages = {"com.spring"})
 public class GradleMyBatisApplication {
 
 	public static void main(String[] args) {

@@ -19,7 +19,14 @@
 		<h2>SpringBoot 실습 홈페이지!</h2>
 	</td>
 	<td>
-		환영합니다.
+		<c:choose>
+			<c:when test="">
+				환영합니다. ()님! <a href="">로그아웃</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${contextPath }/member/loginForm.do">로그인</a>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 </table>

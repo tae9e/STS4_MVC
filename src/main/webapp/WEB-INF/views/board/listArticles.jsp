@@ -9,18 +9,22 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원정보 출력창</title>
+<title>게시판 목록</title>
 </head>
 <body>
+<script>
+	function(){
+		alert("로그인 후 글쓰기가 가능합니다.")
+	}
+</script>
+
 <%-- ${pageContext.request.contextPath }: http://localhost:8090<hr> --%>
 	<table border="1" align="center" width="80%">
-		<tr align="center" bgcolor="lightgreen">
-			<td>아이디</td>	
-			<td>비밀번호</td>	
-			<td>이름</td>	
-			<td>이메일</td>	
-			<td>가입일</td>	
-			<td>삭제</td>	
+		<tr align="center" bgcolor="lightgreen">	
+			<td>글번호</td>	
+			<td>작성자</td>	
+			<td>제목</td>	
+			<td>작성일</td>		
 		</tr>
 		<c:forEach var="member" items="${memberList }">
 		<tr align="center" bgcolor="yellow">
@@ -33,7 +37,7 @@ request.setCharacterEncoding("utf-8");
 		</tr>
 		</c:forEach>
 	</table>
-		<a href="${contextPath }/member/memberForm.do">
-		<h4 style="text-align:center">회원가입</h4></a>
+		<a href="${contextPath }/board/articleForm.do">
+		<h4 style="text-align:center">글쓰기</h4></a>
 </body>
 </html>

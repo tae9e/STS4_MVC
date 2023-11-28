@@ -26,36 +26,38 @@ import com.spring.demo.member.vo.MemberVO;
 public class MemberControllerImpl implements MemberController {
 //	ModelAndView: Model과 비슷.. 데이터를 넣어서 jsp에 넘겨주는 것
 //	시작: http://localhost:8090/member/listMembers.do => 목록내용 + 회원입력화면 버튼
-
+	
+	//외부에서 Service와 VO 주입
 	@Autowired
 	private MemberService memberService;
 
 	@Autowired
-	MemberVO membervo;
+	MemberVO memberVO;
 
 	//0. main- 기본형
 		//http://localhost:8090/main.do 또는
 		//http://localhost:8090
 		//   =>> main.jsp
+//		@GetMapping({"/","/main.do"})
+//		public String main(HttpServletRequest r, HttpServletResponse p) {
+//			return "main";
+//		}
+
+//		0. main- Interceptor 사용
 		@GetMapping({"/","/main.do"})
-		public String main(HttpServletRequest r, HttpServletResponse p) {
-			return "main";
+		public ModelAndView main(HttpServletRequest r, HttpServletResponse p) {
+			String viewName = (String) r.getAttribute("viewName");
+			System.out.println("controllerImpl viewName: " + viewName);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			return mav;
 		}
 
-		//0. main- Interceptor 사용
-//		@GetMapping({"/","/main.do"})
-//		public ModelAndView main(HttpServletRequest r, HttpServletResponse p) {
-//			String viewName = (String) r.getAttribute("viewName");
-//			ModelAndView mav = new ModelAndView();
-//			mav.setViewName(viewName);
-//			return mav;
-//		}
-		
 		
 		//1-1.목록 보기
 //		@Override
 //		@RequestMapping(value="/member/listMembers.do", method = RequestMethod.GET)
-//		public ModelAndView listMembers(HttpServletRequest r, HttpServletResponse p) throws Exception {
+//		public ModelAndView ListMembers(HttpServletRequest r, HttpServletResponse p) throws Exception {
 //			List memberList = memberService.ListMembers();
 //			ModelAndView mav =  new ModelAndView("/member/listMembers");//listMembers.jsp
 //			mav.addObject("memberList",memberList);
@@ -66,6 +68,7 @@ public class MemberControllerImpl implements MemberController {
 		@RequestMapping(value="/member/listMembers.do", method = RequestMethod.GET)
 		public ModelAndView ListMembers(HttpServletRequest r, HttpServletResponse p) throws Exception {
 			String viewName = (String) r.getAttribute("viewName");//Interceptor-preHandle setAttribute받음
+			System.out.println("viewName???" + viewName);
 			List memberList = memberService.ListMembers();
 			ModelAndView mav =  new ModelAndView(viewName);//listMembers.jsp
 			mav.addObject("memberList",memberList);
@@ -75,6 +78,7 @@ public class MemberControllerImpl implements MemberController {
 		//2. 회원가입 입력
 		@RequestMapping(value="/member/*Form.do", method = RequestMethod.GET)
 		public  ModelAndView form(@RequestParam(value="result",required = false) String result,  
+//				required = false => 처음 값은 null
 				@RequestParam(value="action",required = false) String action,
 				HttpServletRequest r, HttpServletResponse p) {
 			String viewName = (String) r.getAttribute("viewName");
@@ -96,6 +100,7 @@ public class MemberControllerImpl implements MemberController {
 
 	// 3. insert -> Post
 	// @ModelAttribute("member") MemberVO memberVO 내용 전달 시 memberVO의 이름이 member
+//								 날라오는 속성의 이름이 member, 그 이름을 MemberVO의 변수 member 안에 넣음
 	// throw Exception은 위에 에러 전달
 	@Override
 	@PostMapping("/member/addMember.do")
@@ -123,22 +128,51 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	@Override
-	public ModelAndView login(MemberVO memberVO, RedirectAttributes rAttr, HttpServletRequest req,
-			HttpServletResponse res) throws Exception {
-
-		return null;
+	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
+	public ModelAndView login(@ModelAttribute("member") MemberVO member, 
+			RedirectAttributes rAttr, 
+			HttpServletRequest request, 
+			HttpServletResponse response)
+			throws Exception {
+		ModelAndView mav = new ModelAndView();
+		memberVO =  memberService.login(member);
+		if(memberVO != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("member", memberVO);
+			session.setAttribute("isLogOn", true);
+			String action = (String) session.getAttribute("action");
+			session.removeAttribute("action");
+			if(action != null) {
+				mav.setViewName("redirect:"+action);
+			}else {
+				mav.setViewName("redirect:/member/listMembers.do");
+			}
+		}else {
+			//RedirectAttributes-리디렉션할때 한컨트롤러에서 다른 컨트롤러로 Attributes를 
+			// 전달시 브라우저 주소창을 통해서 정보 전송		
+			//http://localhost:8090/member/loginForm.do?result=loginFailed
+			rAttr.addAttribute("result", "loginFailed");
+			mav.setViewName("redirect:/member/loginForm.do");
+		}	
+		return mav;
 	}
 
 	@Override
-	public ModelAndView logout(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-		return null;
+	@RequestMapping(value="/member/logout.do", method = RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest r, 
+			                 HttpServletResponse p) throws Exception {
+		HttpSession session = r.getSession();
+		session.removeAttribute("member");
+		session.setAttribute("isLogOn", false);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/member/listMembers.do");
+		return mav;
 	}
+
 
 	@Override
 	public ModelAndView listMembers(HttpServletRequest r, HttpServletResponse p) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
-	}
-
+	}	
 }
