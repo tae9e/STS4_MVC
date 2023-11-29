@@ -19,20 +19,24 @@
 		select * from t_member order by joinDate desc
 		]]>
 	</select>
-	
-	
+
+
 	<insert id="insertMember" parameterType="memberVO">
   <![CDATA[
   insert into t_member(id,pwd,name,email) values(#{id},#{pwd},#{name},#{email})
   ]]>
 	</insert>
-	
+
 	<delete id="deleteMember" parameterType="string">
 	<![CDATA[
   	delete from t_member where id=#{id}
   ]]>
 	</delete>
-
+	
+	<select id="loginById" resultType="memberVO"
+		parameterType="memberVO">
+   <![CDATA[select * from t_member where id=#{id} and pwd=#{pwd}]]>
+	</select>
 
 
 </mapper> 

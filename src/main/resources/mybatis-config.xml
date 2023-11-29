@@ -3,11 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "file:///C:/mybatis-config.dtd">
 <configuration>
-	    
+	<typeAliases>
+		<typeAlias type="com.spring.demo.member.vo.MemberVO"
+			alias="memberVO" />
+		<typeAlias type="com.spring.demo.board.vo.ArticleVO"
+			alias="articleVO" />
+		<typeAlias type="com.spring.demo.board.vo.ImageVO"
+			alias="imageVO" />
+	</typeAliases>
 
-  <mappers>
-    <mapper resource="mybatis/mappers/member.xml"/>
-    <mapper resource="mybatis/mappers/board.xml"/>
-  </mappers>
- 
+	<mappers>
+		<mapper resource="mybatis/mappers/member.xml" />
+		<mapper resource="mybatis/mappers/board.xml" />
+	</mappers>
+
 </configuration>

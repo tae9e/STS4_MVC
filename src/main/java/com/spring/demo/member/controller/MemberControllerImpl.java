@@ -38,20 +38,20 @@ public class MemberControllerImpl implements MemberController {
 		//http://localhost:8090/main.do 또는
 		//http://localhost:8090
 		//   =>> main.jsp
-//		@GetMapping({"/","/main.do"})
-//		public String main(HttpServletRequest r, HttpServletResponse p) {
-//			return "main";
-//		}
+		@GetMapping({"/","/main.do"})
+		public String main(HttpServletRequest r, HttpServletResponse p) {
+			return "main";
+		}
 
 //		0. main- Interceptor 사용
-		@GetMapping({"/","/main.do"})
-		public ModelAndView main(HttpServletRequest r, HttpServletResponse p) {
-			String viewName = (String) r.getAttribute("viewName");
-			System.out.println("controllerImpl viewName: " + viewName);
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName(viewName);
-			return mav;
-		}
+//		@GetMapping({"/","/main.do"})
+//		public ModelAndView main(HttpServletRequest r, HttpServletResponse p) {
+//			String viewName = (String) r.getAttribute("viewName");
+//			System.out.println("controllerImpl viewName: " + viewName);
+//			ModelAndView mav = new ModelAndView();
+//			mav.setViewName(viewName);
+//			return mav;
+//		}
 
 		
 		//1-1.목록 보기
@@ -169,10 +169,4 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
-
-	@Override
-	public ModelAndView listMembers(HttpServletRequest r, HttpServletResponse p) throws Exception {
-		
-		return null;
-	}	
 }

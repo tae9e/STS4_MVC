@@ -31,5 +31,4 @@ public interface MemberController {
 	// 5.로그아웃
 	public ModelAndView logout(HttpServletRequest req,HttpServletResponse res) throws Exception;
 
-	ModelAndView listMembers(HttpServletRequest r, HttpServletResponse p) throws Exception;
 }

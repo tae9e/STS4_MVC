@@ -3,8 +3,12 @@ package com.spring.demo.board.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.spring.demo.board.vo.ArticleVO;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+import com.spring.demo.board.vo.ArticleVO;
+@Mapper
+@Repository("boardDAO")
 public interface BoardDAO {
 	//1. 글 목록
 	public List SelectAllArticleList() throws Exception;
