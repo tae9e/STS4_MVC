@@ -2,8 +2,9 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
- 
+
 <tiles-definitions>
+
 	<definition name="baselayout" template="/WEB-INF/views/common/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
 		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
@@ -11,21 +12,30 @@
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
-	
+
 	<definition name="main" extends="baselayout">
 		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
 		<put-attribute name="title" value="메인페이지" />
 	</definition>
-	
+
 	<definition name="/member/listMembers" extends="baselayout">
 		<put-attribute name="body" value="/WEB-INF/views/member/listMembers.jsp" />
 		<put-attribute name="title" value="회원목록창" />
 	</definition>
-	
+
 	<definition name="/member/memberForm" extends="baselayout">
 		<put-attribute name="body" value="/WEB-INF/views/member/memberForm.jsp" />
 		<put-attribute name="title" value="회원등록창" />
 	</definition>
+
+	<definition name="/member/loginForm" extends="baselayout">
+		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
+		<put-attribute name="title" value="로그인창" />
+	</definition>
+	
+	
+
+	
 </tiles-definitions>
 
 

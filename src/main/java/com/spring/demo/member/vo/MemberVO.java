@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
+
+
 @Component("memberVO")
 public class MemberVO {
 	private String id;
@@ -15,6 +17,8 @@ public class MemberVO {
 	public MemberVO() {
 
 	}
+
+	
 
 	public MemberVO(String id, String pwd, String name, String email,Date joinDate) {
 		super();
@@ -68,5 +72,6 @@ public class MemberVO {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-
+	
+	
 }

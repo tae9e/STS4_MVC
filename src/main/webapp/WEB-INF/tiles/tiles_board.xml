@@ -4,10 +4,11 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="board/listArticles" extends="baselayout">
-		<put-attribute name="title" value="글목록창" />
+
+	<definition name="/board/listArticles" extends="baselayout">
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/listArticles.jsp" />
+		<put-attribute name="title" value="글목록창" />
 	</definition>
 
 	<definition name="/board/articleForm" extends="baselayout">
@@ -17,7 +18,7 @@
 	</definition>
 
 	<definition name="/board/viewArticle" extends="baselayout">
-		<put-attribute name="title" value="글상세창" />
+		<put-attribute name="title" value="글 상세창" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/viewArticle.jsp" />
 	</definition>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.board">
+<mapper namespace="com.spring.demo.board.dao.BoardDAO">
 
 	<!-- oracle database에 있는 내용 가지고 올 때 사용 -->
 	<resultMap type="articleVO" id="articlesResult">
@@ -13,7 +13,7 @@
 		<result property="content" column="content" />
 		<result property="imageFileName" column="imageFileName" />
 <!-- 		id: 외부에서 오는 외래키 -->
-<!-- 		<result property="id" column="id" /> -->
+		<result property="id" column="id" /> 
 		<result property="writeDate" column="writeDate" />
 	</resultMap>
 	

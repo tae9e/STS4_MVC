@@ -51,18 +51,19 @@
 </style>
 </head>
 <body>
+
 	<div id="container">
 		<div id="header">
-			<tiles:insertAttribute name="header" />
+			<tiles:insertAttribute name="header"/>
 		</div>
 		<div id="sidebar-left">
-			<tiles:insertAttribute name="side" />
+			<tiles:insertAttribute name="side"/>
 		</div>
 		<div id="content">
-			<tiles:insertAttribute name="body" />
+			<tiles:insertAttribute name="body"/>
 		</div>
 		<div id="footer">
-			<tiles:insertAttribute name="footer" />
+			<tiles:insertAttribute name="footer"/>
 		</div>
 	</div>
 </body>

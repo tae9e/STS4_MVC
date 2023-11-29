@@ -15,7 +15,7 @@ public interface BoardController {
 		public ModelAndView listArticles(HttpServletRequest req,HttpServletResponse res) throws Exception;
 
 		// 2. 등록, 저장(insert)
-		public ModelAndView addNewArticle(MultipartHttpServletRequest mul,HttpServletResponse res) 
+		public ResponseEntity addNewArticle(MultipartHttpServletRequest mul,HttpServletResponse res) 
 				throws Exception;
 
 		// 3. view

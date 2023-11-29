@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.spring.demo.board.vo.ArticleVO;
+//BoardDAOImpl의 역할을 @Mapper가 함
 @Mapper
 @Repository("boardDAO")
 public interface BoardDAO {

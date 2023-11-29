@@ -135,12 +135,21 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response)
 			throws Exception {
 		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("member/login.do mav" + mav);
+		
 		memberVO =  memberService.login(member);
 		if(memberVO != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
 			session.setAttribute("isLogOn", true);
+			
+			System.out.println("session");
 			String action = (String) session.getAttribute("action");
+			
+			System.out.println("12345");
+			System.out.println("session.action" + action);
+			
 			session.removeAttribute("action");
 			if(action != null) {
 				mav.setViewName("redirect:"+action);

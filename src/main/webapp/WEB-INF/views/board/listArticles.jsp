@@ -12,32 +12,48 @@ request.setCharacterEncoding("utf-8");
 <title>게시판 목록</title>
 </head>
 <body>
-<script>
-	function(){
-		alert("로그인 후 글쓰기가 가능합니다.")
-	}
-</script>
+	<script>
+		function fn_articleForm(isLogOn, articleForm, loginForm) {
+			if (isLogOn != '' && isLogOn != false) {
+				location.href = articleForm;
+			} else {
+				alert("로그인 후 글쓰기가 가능합니다.");
+				location.href = loginForm + '?action=/board/articleForm.do';
+			}
+		}
+	</script>
 
-<%-- ${pageContext.request.contextPath }: http://localhost:8090<hr> --%>
+	<%-- ${pageContext.request.contextPath }: http://localhost:8090<hr> --%>
 	<table border="1" align="center" width="80%">
-		<tr align="center" bgcolor="lightgreen">	
-			<td>글번호</td>	
-			<td>작성자</td>	
-			<td>제목</td>	
-			<td>작성일</td>		
+		<tr align="center" bgcolor="lightgreen">
+			<td>글번호</td>
+			<td>작성자</td>
+			<td>제목</td>
+			<td>작성일</td>
 		</tr>
-		<c:forEach var="member" items="${memberList }">
-		<tr align="center" bgcolor="yellow">
-			<td>${member.id }</td>	
-			<td>${member.pwd }</td>	
-			<td>${member.name }</td>	
-			<td>${member.email }</td>	
-			<td>${member.joinDate }</td>	
-			<td><a href="${contextPath }/member/removemember.do?id=${member.id}">삭제</a></td>	
-		</tr>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${articleList == null }">
+				<tr align="center" bgcolor="yellow">
+					<td colspan="4">등록된 글이 없습니다.</td>
+				</tr>
+			</c:when>
+
+			<c:when test="${articleList != null }">
+				<c:forEach var="article" items="${articleList }"
+					varStatus="articleNum">
+					<tr align="center" bgcolor="lightgreen">
+<!-- 					articleNum.count는 varStatus를 이용해서 글번호 작성.. data 변수와 상관없음 -->
+						<td>${articleNum.count }</td>
+						<td>${article.id }</td>
+						<td>${article.title }</td>
+						<td>${article.writeDate }</td>
+					</tr>
+				</c:forEach>
+			</c:when>
+		</c:choose>
 	</table>
-		<a href="${contextPath }/board/articleForm.do">
-		<h4 style="text-align:center">글쓰기</h4></a>
+	<a href="javascript:fn_articleForm('${isLogOn}', 
+	'${contextPath }/board/articleForm.do', 
+	'${contextPath }/member.loginForm.do')">글쓰기</a>
 </body>
 </html>
