@@ -134,6 +134,7 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletRequest request, 
 			HttpServletResponse response)
 			throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println("member/login.do mav" + mav);
@@ -146,10 +147,6 @@ public class MemberControllerImpl implements MemberController {
 			
 			System.out.println("session");
 			String action = (String) session.getAttribute("action");
-			
-			System.out.println("12345");
-			System.out.println("session.action" + action);
-			
 			session.removeAttribute("action");
 			if(action != null) {
 				mav.setViewName("redirect:"+action);
@@ -157,9 +154,6 @@ public class MemberControllerImpl implements MemberController {
 				mav.setViewName("redirect:/member/listMembers.do");
 			}
 		}else {
-			//RedirectAttributes-리디렉션할때 한컨트롤러에서 다른 컨트롤러로 Attributes를 
-			// 전달시 브라우저 주소창을 통해서 정보 전송		
-			//http://localhost:8090/member/loginForm.do?result=loginFailed
 			rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/member/loginForm.do");
 		}	
