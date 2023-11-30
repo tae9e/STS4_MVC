@@ -33,15 +33,24 @@
 	
 	<insert id="insertNewArticle" parameterType="articleVO">
   <![CDATA[
-  insert into t_board(title,content,imageFileName) values(#{title},#{content},#{imageFileName})
+  insert into t_board(articleNO, title,content,imageFileName) values(t_board_seq.nextval, #{title}, #{content}, #{imageFileName}) 
+
   ]]>
 	</insert>
 	
 	<delete id="deleteArticle" parameterType="string">
 	<![CDATA[
-  	delete from t_member where id=#{id}
+  	delete from t_board where articleNO = #{articleNO}
   ]]>
 	</delete>
+	
+	<select id="selectArticle" resultMap="articlesResult">
+	<![CDATA[
+		select articleNO, title, content, imageFileName from t_board where articleNO = #{articleNO}
+		]]>
+	
+	</select>
+	
 
 
 

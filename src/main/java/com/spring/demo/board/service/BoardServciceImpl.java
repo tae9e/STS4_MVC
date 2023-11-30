@@ -46,6 +46,7 @@ public class BoardServciceImpl implements BoardService {
 
 	@Override
 	public void removeArticle(int articleNO) throws Exception {
+		System.out.println("removeArticle: " + articleNO);
 		boardDAO.deleteArticle(articleNO);
 		
 	}

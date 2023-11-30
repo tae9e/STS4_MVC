@@ -122,26 +122,7 @@
     <textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${article.content }</textarea>
    </td>  
   </tr>
- <%-- 
- <c:if test="${not empty imageFileList && imageFileList!='null' }">
-	  <c:forEach var="item" items="${imageFileList}" varStatus="status" >
-		    <tr>
-			    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
-			      이미지${status.count }
-			   </td>
-			   <td>
-			     <input  type= "hidden"   name="originalFileName" value="${item.imageFileName }" />
-			    <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${item.imageFileName}" id="preview"  /><br>
-			   </td>   
-			  </tr>  
-			  <tr>
-			    <td>
-			       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
-			    </td>
-			 </tr>
-		</c:forEach>
- </c:if>
- 	 --%>    
+
  	 
   <c:choose> 
 	  <c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
@@ -191,6 +172,7 @@
 	   <td colspan="2"   >
 	       <input type=button value="수정반영하기"   onClick="fn_modify_article(frmArticle)"  >
            <input type=button value="취소"  onClick="backToList(frmArticle)">
+           <input type="button" value="버튼이 나와야 하는데...">
 	   </td>   
   </tr>
     
@@ -198,6 +180,7 @@
    <td colspan="2" align="center">
        <c:if test="${member.id == article.id }">
 	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
+	      <input type="button" value="버튼이 나와야 하는데...">
 	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
 	    </c:if>
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">

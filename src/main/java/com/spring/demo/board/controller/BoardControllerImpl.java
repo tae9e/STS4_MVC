@@ -40,6 +40,9 @@ public class BoardControllerImpl implements BoardController {
 	@Autowired
 	ArticleVO articleVO;
 	
+	
+
+	
 	@Override
 	@RequestMapping(value="/board/listArticles.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticles(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -53,6 +56,7 @@ public class BoardControllerImpl implements BoardController {
 	
 	
 	 //한 개 이미지 글쓰기
+	//ResponseEntity, MultipartHttpServletRequest => 이미지와 글을 덩어리로 보냄
 		@Override
 		@RequestMapping(value="/board/addNewArticle.do" ,method = RequestMethod.POST)
 		@ResponseBody
@@ -61,15 +65,20 @@ public class BoardControllerImpl implements BoardController {
 			multipartRequest.setCharacterEncoding("utf-8");
 			Map<String,Object> articleMap = new HashMap<String, Object>();
 			Enumeration enu=multipartRequest.getParameterNames();
+			
+			System.out.println("Enumeration의 값: " + enu);
 			while(enu.hasMoreElements()){
 				String name=(String)enu.nextElement();
 				String value=multipartRequest.getParameter(name);
 				articleMap.put(name,value);
 			}
-			
 			String imageFileName= upload(multipartRequest);
+			System.out.println("imageFileNAME의 이름: " + imageFileName);
 			HttpSession session = multipartRequest.getSession();
+			System.out.println("session의 값?: " + session);
 			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			System.out.println("MEMBERVO의 값: " + memberVO);
+			
 			String id = memberVO.getId();
 			articleMap.put("parentNO", 0);
 			articleMap.put("id", id);
